@@ -21,19 +21,29 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
+                        <a class="nav-link" href="#home" data-translate="home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">Features</a>
+                        <a class="nav-link" href="#features" data-translate="features">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                        <a class="nav-link" href="#how-it-works" data-translate="how_it_works">How It Works</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#about" data-translate="about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#contact" data-translate="contact">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown ms-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-language"></i> <span data-translate="language">Language</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('ar')">العربية (Arabic)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français (French)</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -45,11 +55,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content">
-                    <h1 class="display-4 fw-bold mb-4">Revolutionary Baby Safety with Smart Cradle</h1>
-                    <p class="lead mb-4">Advanced biometric monitoring technology that keeps your baby safe 24/7. Real-time vital sign tracking with instant alerts to parents and medical staff.</p>
+                    <h1 class="display-4 fw-bold mb-4" data-translate="hero_title">Revolutionary Baby Safety with Smart Cradle</h1>
+                    <p class="lead mb-4" data-translate="hero_description">Advanced biometric monitoring technology that keeps your baby safe 24/7. Real-time vital sign tracking with instant alerts to parents and medical staff.</p>
                     <div class="d-flex flex-wrap gap-3">
-                        <button class="btn btn-custom btn-lg">Learn More</button>
-                        <button class="btn btn-outline-light btn-lg">Watch Demo</button>
+                        <button class="btn btn-custom btn-lg" data-translate="learn_more">Learn More</button>
+                        <button class="btn btn-outline-light btn-lg" data-translate="watch_demo">Watch Demo</button>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
@@ -73,25 +83,25 @@
                 <div class="col-md-3 col-6">
                     <div class="stat-item">
                         <span class="stat-number">24/7</span>
-                        <p class="mb-0">Continuous Monitoring</p>
+                        <p class="mb-0" data-translate="continuous_monitoring">Continuous Monitoring</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="stat-item">
                         <span class="stat-number">5</span>
-                        <p class="mb-0">Vital Signs Tracked</p>
+                        <p class="mb-0" data-translate="vital_signs_tracked">Vital Signs Tracked</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="stat-item">
                         <span class="stat-number">99.9%</span>
-                        <p class="mb-0">Accuracy Rate</p>
+                        <p class="mb-0" data-translate="accuracy_rate">Accuracy Rate</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="stat-item">
-                        <span class="stat-number">{'<'}1s</span>
-                        <p class="mb-0">Alert Response Time</p>
+                        <span class="stat-number">1s</span>
+                        <p class="mb-0" data-translate="alert_response_time">Alert Response Time</p>
                     </div>
                 </div>
             </div>
@@ -103,8 +113,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="section-title display-5 fw-bold">Advanced Features</h2>
-                    <p class="lead text-muted mb-5">Cutting-edge technology designed for your baby's safety and your peace of mind</p>
+                    <h2 class="section-title display-5 fw-bold" data-translate="advanced_features">Advanced Features</h2>
+                    <p class="lead text-muted mb-5" data-translate="features_subtitle">Cutting-edge technology designed for your baby's safety and your peace of mind</p>
                 </div>
             </div>
             <div class="row g-4">
@@ -114,37 +124,40 @@
                         <div class="feature-icon">
                             <i class="fas fa-heartbeat"></i>
                         </div>
-                        <h4 class="text-center mb-3">Real-time Monitoring</h4>
-                        <p class="text-center text-muted">Continuous tracking of breathing, heart rate, temperature, and movement patterns with precision sensors.</p>
+                        <h4 class="text-center mb-3" data-translate="real_time_monitoring">Real-time Monitoring</h4>
+                        <p class="text-center text-muted" data-translate="real_time_monitoring_desc">Continuous tracking of breathing, heart rate, temperature, and movement patterns with precision sensors.</p>
                     </div>
                     </a>
                     
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <a href="../Analitics/analytics.html" style="text-decoration: none;">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-center mb-3" data-translate="data_analytics">Data Analytics</h4>
+                        <p class="text-center text-muted" data-translate="data_analytics_desc">Comprehensive insights into health trends and patterns to track your baby's development.</p>
+                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-bell"></i>
                         </div>
-                        <h4 class="text-center mb-3">Instant Alerts</h4>
-                        <p class="text-center text-muted">Immediate notifications sent to parents' phones and medical staff when abnormalities are detected.</p>
+                        <h4 class="text-center mb-3" data-translate="instant_alerts">Instant Alerts</h4>
+                        <p class="text-center text-muted" data-translate="instant_alerts_desc">Immediate notifications sent to parents' phones and medical staff when abnormalities are detected.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h4 class="text-center mb-3">Data Analytics</h4>
-                        <p class="text-center text-muted">Comprehensive insights into health trends and patterns to track your baby's development.</p>
-                    </div>
-                </div>
+                
                 <div class="col-lg-4 col-md-6">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
-                        <h4 class="text-center mb-3">Mobile Integration</h4>
-                        <p class="text-center text-muted">Seamless connectivity with mobile apps and wearables for constant updates on your baby's condition.</p>
+                        <h4 class="text-center mb-3" data-translate="mobile_integration">Mobile Integration</h4>
+                        <p class="text-center text-muted" data-translate="mobile_integration_desc">Seamless connectivity with mobile apps and wearables for constant updates on your baby's condition.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -152,8 +165,8 @@
                         <div class="feature-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h4 class="text-center mb-3">Medical Grade Safety</h4>
-                        <p class="text-center text-muted">Hospital-grade sensors and safety protocols ensuring the highest level of protection for your baby.</p>
+                        <h4 class="text-center mb-3" data-translate="medical_grade">Medical Grade Safety</h4>
+                        <p class="text-center text-muted" data-translate="medical_grade_desc">Hospital-grade sensors and safety protocols ensuring the highest level of protection for your baby.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -161,8 +174,8 @@
                         <div class="feature-icon">
                             <i class="fas fa-cloud"></i>
                         </div>
-                        <h4 class="text-center mb-3">Cloud Storage</h4>
-                        <p class="text-center text-muted">Secure cloud storage of all monitoring data with easy access for parents and healthcare providers.</p>
+                        <h4 class="text-center mb-3" data-translate="cloud_storage">Cloud Storage</h4>
+                        <p class="text-center text-muted" data-translate="cloud_storage_desc">Secure cloud storage of all monitoring data with easy access for parents and healthcare providers.</p>
                     </div>
                 </div>
             </div>
@@ -174,37 +187,37 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="section-title display-5 fw-bold">How It Works</h2>
-                    <p class="lead text-muted mb-5">Simple setup, advanced technology, complete peace of mind</p>
+                    <h2 class="section-title display-5 fw-bold" data-translate="how_it_works_title">How It Works</h2>
+                    <p class="lead text-muted mb-5" data-translate="how_it_works_subtitle">Simple setup, advanced technology, complete peace of mind</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="step-item">
                         <div class="step-number">1</div>
-                        <h5>Setup & Installation</h5>
-                        <p class="text-muted">Easy installation in your home or hospital room with professional guidance.</p>
+                        <h5 data-translate="setup_installation">Setup & Installation</h5>
+                        <p class="text-muted" data-translate="setup_installation_desc">Easy installation in your home or hospital room with professional guidance.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="step-item">
                         <div class="step-number">2</div>
-                        <h5>Sensor Calibration</h5>
-                        <p class="text-muted">Automatic calibration of biometric sensors for your baby's unique characteristics.</p>
+                        <h5 data-translate="sensor_calibration">Sensor Calibration</h5>
+                        <p class="text-muted" data-translate="sensor_calibration_desc">Automatic calibration of biometric sensors for your baby's unique characteristics.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="step-item">
                         <div class="step-number">3</div>
-                        <h5>Continuous Monitoring</h5>
-                        <p class="text-muted">24/7 monitoring of vital signs with real-time data processing and analysis.</p>
+                        <h5 data-translate="continuous_monitoring_title">Continuous Monitoring</h5>
+                        <p class="text-muted" data-translate="continuous_monitoring_desc">24/7 monitoring of vital signs with real-time data processing and analysis.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="step-item">
                         <div class="step-number">4</div>
-                        <h5>Alert & Response</h5>
-                        <p class="text-muted">Instant alerts and emergency response coordination when needed.</p>
+                        <h5 data-translate="alert_response">Alert & Response</h5>
+                        <p class="text-muted" data-translate="alert_response_desc">Instant alerts and emergency response coordination when needed.</p>
                     </div>
                 </div>
             </div>
@@ -216,27 +229,27 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="display-5 fw-bold mb-4">Revolutionizing Baby Care</h2>
-                    <p class="lead mb-4">The Smart Cradle represents a breakthrough in infant care technology, combining advanced biometric monitoring with intuitive design to provide unparalleled safety for your most precious gift.</p>
+                    <h2 class="display-5 fw-bold mb-4" data-translate="about_title">Revolutionizing Baby Care</h2>
+                    <p class="lead mb-4" data-translate="about_description">The Smart Cradle represents a breakthrough in infant care technology, combining advanced biometric monitoring with intuitive design to provide unparalleled safety for your most precious gift.</p>
                     <div class="row">
                         <div class="col-6">
                             <div class="d-flex align-items-center mb-3">
                                 <i class="fas fa-check-circle text-success me-3"></i>
-                                <span>FDA Approved</span>
+                                <span data-translate="fda_approved">FDA Approved</span>
                             </div>
                             <div class="d-flex align-items-center mb-3">
                                 <i class="fas fa-check-circle text-success me-3"></i>
-                                <span>Hospital Grade</span>
+                                <span data-translate="hospital_grade">Hospital Grade</span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="d-flex align-items-center mb-3">
                                 <i class="fas fa-check-circle text-success me-3"></i>
-                                <span>24/7 Support</span>
+                                <span data-translate="support_247">24/7 Support</span>
                             </div>
                             <div class="d-flex align-items-center mb-3">
                                 <i class="fas fa-check-circle text-success me-3"></i>
-                                <span>Easy Setup</span>
+                                <span data-translate="easy_setup">Easy Setup</span>
                             </div>
                         </div>
                     </div>
@@ -258,11 +271,11 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h2 class="display-5 fw-bold mb-4">Ready to Secure Your Baby's Future?</h2>
-                    <p class="lead mb-4">Join thousands of parents who trust Smart Cradle for their baby's safety. Get started today with our comprehensive monitoring solution.</p>
+                    <h2 class="display-5 fw-bold mb-4" data-translate="cta_title">Ready to Secure Your Baby's Future?</h2>
+                    <p class="lead mb-4" data-translate="cta_description">Join thousands of parents who trust Smart Cradle for their baby's safety. Get started today with our comprehensive monitoring solution.</p>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <button class="btn btn-light btn-lg px-5">Get Started Now</button>
-                        <button class="btn btn-outline-light btn-lg px-5">Schedule Demo</button>
+                        <button class="btn btn-light btn-lg px-5" data-translate="get_started">Get Started Now</button>
+                        <button class="btn btn-outline-light btn-lg px-5" data-translate="schedule_demo">Schedule Demo</button>
                     </div>
                 </div>
             </div>
@@ -274,8 +287,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="section-title display-5 fw-bold">Get In Touch</h2>
-                    <p class="lead text-muted mb-5">Have questions? We're here to help you every step of the way.</p>
+                    <h2 class="section-title display-5 fw-bold" data-translate="contact_title">Get In Touch</h2>
+                    <p class="lead text-muted mb-5" data-translate="contact_subtitle">Have questions? We're here to help you every step of the way.</p>
                 </div>
             </div>
             <div class="row">
@@ -284,7 +297,7 @@
                         <div class="feature-icon bg-primary text-white mb-3">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <h5>Call Us</h5>
+                        <h5 data-translate="call_us">Call Us</h5>
                         <p class="text-muted">+1 (555) 123-4567</p>
                     </div>
                 </div>
@@ -293,7 +306,7 @@
                         <div class="feature-icon bg-primary text-white mb-3">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <h5>Email Us</h5>
+                        <h5 data-translate="email_us">Email Us</h5>
                         <p class="text-muted">info@smartcradle.com</p>
                     </div>
                 </div>
@@ -302,8 +315,8 @@
                         <div class="feature-icon bg-primary text-white mb-3">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h5>Visit Us</h5>
-                        <p class="text-muted">123 Innovation Drive<br>Tech City, TC 12345</p>
+                        <h5 data-translate="visit_us">Visit Us</h5>
+                        <p class="text-muted" data-translate="address">123 Innovation Drive<br>Tech City, TC 12345</p>
                     </div>
                 </div>
             </div>
@@ -318,7 +331,7 @@
                     <h5 class="mb-3">
                         <i class="fas fa-baby me-2"></i>Smart Cradle
                     </h5>
-                    <p class="text-light">Revolutionizing baby care with advanced biometric monitoring technology for the safety and peace of mind of parents worldwide.</p>
+                    <p class="text-light" data-translate="footer_description">Revolutionizing baby care with advanced biometric monitoring technology for the safety and peace of mind of parents worldwide.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -327,49 +340,49 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Product</h6>
+                    <h6 class="mb-3" data-translate="product">Product</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light text-decoration-none">Features</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Pricing</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Demo</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Support</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="features_footer">Features</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="pricing">Pricing</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="demo_footer">Demo</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="support_footer">Support</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Company</h6>
+                    <h6 class="mb-3" data-translate="company">Company</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light text-decoration-none">About</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Careers</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">News</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Contact</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="about_footer">About</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="careers">Careers</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="news">News</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="contact_footer">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Resources</h6>
+                    <h6 class="mb-3" data-translate="resources">Resources</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light text-decoration-none">Documentation</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Help Center</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Privacy</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Terms</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="documentation">Documentation</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="help_center">Help Center</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="privacy">Privacy</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="terms">Terms</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="mb-3">Legal</h6>
+                    <h6 class="mb-3" data-translate="legal">Legal</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Terms of Service</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">GDPR</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Compliance</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="privacy_policy">Privacy Policy</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="terms_service">Terms of Service</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="gdpr">GDPR</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-translate="compliance">Compliance</a></li>
                     </ul>
                 </div>
             </div>
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0 text-light">&copy; 2024 Smart Cradle. All rights reserved.</p>
+                    <p class="mb-0 text-light">&copy; <span data-translate="copyright">2024 Smart Cradle. All rights reserved.</span></p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="mb-0 text-light">Made with <i class="fas fa-heart text-danger"></i> for safer babies</p>
+                    <p class="mb-0 text-light" data-translate="made_with">Made with <i class="fas fa-heart text-danger"></i> for safer babies</p>
                 </div>
             </div>
         </div>
@@ -377,43 +390,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS for animations -->
-    <script>
-        // Add smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add pulse animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.1); }
-                100% { transform: scale(1); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255,255,255,0.98)';
-            } else {
-                navbar.style.background = 'rgba(255,255,255,0.95)';
-            }
-        });
-    </script>
+    <script src="./script.js"></script>
 </body>
 </html>

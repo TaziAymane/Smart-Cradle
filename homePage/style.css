@@ -181,3 +181,24 @@
                 font-size: 2.5rem;
             }
         }
+
+        /* Translate  */
+         /* RTL support for Arabic */
+        html[dir="rtl"] body {
+            text-align: right;
+            direction: rtl;
+        }
+        html[dir="rtl"] .navbar-nav {
+            padding-right: 0;
+        }
+        html[dir="rtl"] .me-2 {
+            margin-right: 0 !important;
+            margin-left: 0.5rem !important;
+        }
+        html[dir="rtl"] .ms-auto {
+            margin-right: auto !important;
+            margin-left: 0 !important;
+        }
+        html[dir="rtl"] .text-end {
+            text-align: left !important;
+        }

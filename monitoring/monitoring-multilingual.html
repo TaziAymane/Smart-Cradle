@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="./style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -19,7 +21,8 @@
             <div class="d-flex align-items-center">
                 <!-- Language Selector -->
                 <div class="dropdown me-3">
-                    <button class="btn btn-outline-secondary dropdown-toggle language-selector" type="button" id="languageDropdown" data-bs-toggle="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle language-selector" type="button"
+                        id="languageDropdown" data-bs-toggle="dropdown">
                         <!-- <div class="language-flag flag-en" id="currentFlag"></div> -->
                         <span id="currentLanguage">English</span>
                     </button>
@@ -44,13 +47,14 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="live-indicator me-3">
                     <div class="live-dot"></div>
                     <span data-translate="live_status">LIVE</span>
                 </div>
                 <button class="btn emergency-btn">
-                    <i class="fas fa-exclamation-triangle me-2"></i><span data-translate="emergency_btn">Emergency</span>
+                    <i class="fas fa-exclamation-triangle me-2"></i><span
+                        data-translate="emergency_btn">Emergency</span>
                 </button>
             </div>
         </div>
@@ -92,14 +96,15 @@
                                 <div>
                                     <h2 class="mb-1" data-translate="main_title">Real-time Baby Monitoring</h2>
                                     <p class="text-muted mb-0">
-                                        <span data-translate="last_updated">Last updated:</span> 
+                                        <span data-translate="last_updated">Last updated:</span>
                                         <span id="lastUpdate"></span>
                                     </p>
                                 </div>
                                 <div class="text-end">
                                     <div class="d-flex align-items-center">
                                         <span class="status-indicator status-normal"></span>
-                                        <span class="fw-bold text-success" data-translate="status_normal">All Systems Normal</span>
+                                        <span class="fw-bold text-success" data-translate="status_normal">All Systems
+                                            Normal</span>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +123,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <h6 class="mb-1" data-translate="baby_name_label">Baby Name</h6>
-                                                <p class="mb-0 fs-5" data-translate="baby_name">Emma Johnson</p>
+                                                <p class="mb-0 fs-5" data-translate="baby_name">Sara motawakil</p>
                                             </div>
                                             <div class="col-md-3">
                                                 <h6 class="mb-1" data-translate="baby_age_label">Age</h6>
@@ -131,7 +136,8 @@
                                             <div class="col-md-3">
                                                 <h6 class="mb-1" data-translate="sleep_status_label">Sleep Status</h6>
                                                 <p class="mb-0 fs-5">
-                                                    <i class="fas fa-moon me-2"></i><span data-translate="sleep_status">Sleeping (2h 15m)</span>
+                                                    <i class="fas fa-moon me-2"></i><span
+                                                        data-translate="sleep_status">Sleeping (2h 15m)</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -148,7 +154,8 @@
                             <div class="vital-card">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="mb-0">
-                                        <i class="fas fa-heartbeat heart-icon me-2"></i><span data-translate="heart_rate_monitor">Heart Rate Monitor</span>
+                                        <i class="fas fa-heartbeat heart-icon me-2"></i><span
+                                            data-translate="heart_rate_monitor">Heart Rate Monitor</span>
                                     </h5>
                                     <span class="badge bg-success" data-translate="status_normal_badge">Normal</span>
                                 </div>
@@ -158,7 +165,8 @@
                                     <canvas id="ecgCanvas" class="ecg-wave"></canvas>
                                 </div>
                                 <div class="mt-3">
-                                    <small class="text-muted" data-translate="heart_rate_range">Normal range: 120-160 BPM</small>
+                                    <small class="text-muted" data-translate="heart_rate_range">Normal range: 120-160
+                                        BPM</small>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +175,8 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="vital-card text-center">
                                 <h6 class="mb-3">
-                                    <i class="fas fa-thermometer-half text-warning me-2"></i><span data-translate="temperature_label">Temperature</span>
+                                    <i class="fas fa-thermometer-half text-warning me-2"></i><span
+                                        data-translate="temperature_label">Temperature</span>
                                 </h6>
                                 <div class="temperature-gauge mx-auto mb-3">
                                     <div class="temperature-inner">
@@ -176,8 +185,10 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <small class="text-muted"><span data-translate="min_label">Min:</span> 36.2°C</small>
-                                    <small class="text-muted"><span data-translate="max_label">Max:</span> 37.1°C</small>
+                                    <small class="text-muted"><span data-translate="min_label">Min:</span>
+                                        36.2°C</small>
+                                    <small class="text-muted"><span data-translate="max_label">Max:</span>
+                                        37.1°C</small>
                                 </div>
                                 <div class="mt-2">
                                     <span class="badge bg-success" data-translate="status_normal_badge">Normal</span>
@@ -189,7 +200,8 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="vital-card text-center">
                                 <h6 class="mb-3">
-                                    <i class="fas fa-lungs text-info me-2"></i><span data-translate="breathing_rate_label">Breathing Rate</span>
+                                    <i class="fas fa-lungs text-info me-2"></i><span
+                                        data-translate="breathing_rate_label">Breathing Rate</span>
                                 </h6>
                                 <div class="vital-value text-info" id="breathingRate">42</div>
                                 <div class="vital-unit" data-translate="breaths_per_min">breaths/min</div>
@@ -197,7 +209,8 @@
                                     <div class="progress" style="height: 8px;">
                                         <div class="progress-bar bg-info" style="width: 70%"></div>
                                     </div>
-                                    <small class="text-muted mt-2 d-block" data-translate="breathing_range">Normal range: 30-60</small>
+                                    <small class="text-muted mt-2 d-block" data-translate="breathing_range">Normal
+                                        range: 30-60</small>
                                 </div>
                                 <div class="mt-2">
                                     <span class="badge bg-success" data-translate="status_normal_badge">Normal</span>
@@ -212,7 +225,8 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="vital-card text-center">
                                 <h6 class="mb-3">
-                                    <i class="fas fa-tint text-primary me-2"></i><span data-translate="oxygen_saturation_label">Oxygen Saturation</span>
+                                    <i class="fas fa-tint text-primary me-2"></i><span
+                                        data-translate="oxygen_saturation_label">Oxygen Saturation</span>
                                 </h6>
                                 <div class="vital-value text-primary" id="oxygenSat">98</div>
                                 <div class="vital-unit">%</div>
@@ -220,7 +234,8 @@
                                     <div class="progress" style="height: 8px;">
                                         <div class="progress-bar bg-primary" style="width: 98%"></div>
                                     </div>
-                                    <small class="text-muted mt-2 d-block" data-translate="oxygen_range">Normal: > 95%</small>
+                                    <small class="text-muted mt-2 d-block" data-translate="oxygen_range">Normal: >
+                                        95%</small>
                                 </div>
                                 <div class="mt-2">
                                     <span class="badge bg-success" data-translate="status_excellent">Excellent</span>
@@ -232,15 +247,18 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="vital-card text-center">
                                 <h6 class="mb-3">
-                                    <i class="fas fa-running text-success me-2"></i><span data-translate="movement_label">Movement</span>
+                                    <i class="fas fa-running text-success me-2"></i><span
+                                        data-translate="movement_label">Movement</span>
                                 </h6>
                                 <div class="movement-indicator mx-auto mb-3">
                                     <i class="fas fa-child"></i>
                                 </div>
                                 <div class="fw-bold text-success" data-translate="movement_active">Active</div>
-                                <small class="text-muted" data-translate="last_movement">Last movement: 2 min ago</small>
+                                <small class="text-muted" data-translate="last_movement">Last movement: 2 min
+                                    ago</small>
                                 <div class="mt-2">
-                                    <span class="badge bg-success" data-translate="normal_activity">Normal Activity</span>
+                                    <span class="badge bg-success" data-translate="normal_activity">Normal
+                                        Activity</span>
                                 </div>
                             </div>
                         </div>
@@ -249,15 +267,18 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="vital-card text-center">
                                 <h6 class="mb-3">
-                                    <i class="fas fa-bed text-purple me-2"></i><span data-translate="sleep_quality_label">Sleep Quality</span>
+                                    <i class="fas fa-bed text-purple me-2"></i><span
+                                        data-translate="sleep_quality_label">Sleep Quality</span>
                                 </h6>
                                 <div class="vital-value text-purple">85</div>
                                 <div class="vital-unit">%</div>
                                 <div class="mt-3">
                                     <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-purple" style="width: 85%; background-color: #9b59b6 !important;"></div>
+                                        <div class="progress-bar bg-purple"
+                                            style="width: 85%; background-color: #9b59b6 !important;"></div>
                                     </div>
-                                    <small class="text-muted mt-2 d-block" data-translate="deep_sleep">Deep sleep phase</small>
+                                    <small class="text-muted mt-2 d-block" data-translate="deep_sleep">Deep sleep
+                                        phase</small>
                                 </div>
                                 <div class="mt-2">
                                     <span class="badge bg-success" data-translate="good_quality">Good Quality</span>
@@ -269,7 +290,8 @@
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="vital-card text-center">
                                 <h6 class="mb-3">
-                                    <i class="fas fa-home text-secondary me-2"></i><span data-translate="environment_label">Environment</span>
+                                    <i class="fas fa-home text-secondary me-2"></i><span
+                                        data-translate="environment_label">Environment</span>
                                 </h6>
                                 <div class="row text-center">
                                     <div class="col-6">
@@ -283,7 +305,8 @@
                                 </div>
                                 <div class="mt-3">
                                     <div class="fw-bold text-success">
-                                        <i class="fas fa-volume-down me-1"></i><span data-translate="quiet_status">Quiet (25 dB)</span>
+                                        <i class="fas fa-volume-down me-1"></i><span data-translate="quiet_status">Quiet
+                                            (25 dB)</span>
                                     </div>
                                 </div>
                                 <div class="mt-2">
@@ -315,52 +338,63 @@
                             <div class="alert-panel">
                                 <div class="p-3 border-bottom">
                                     <h5 class="mb-0">
-                                        <i class="fas fa-bell me-2"></i><span data-translate="recent_alerts">Recent Alerts</span>
+                                        <i class="fas fa-bell me-2"></i><span data-translate="recent_alerts">Recent
+                                            Alerts</span>
                                     </h5>
                                 </div>
                                 <div class="p-3">
                                     <div class="alert-item alert-normal">
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <div class="fw-bold" data-translate="alert_all_normal">All Systems Normal</div>
-                                                <small class="text-muted" data-translate="alert_monitoring_active">Continuous monitoring active</small>
+                                                <div class="fw-bold" data-translate="alert_all_normal">All Systems
+                                                    Normal</div>
+                                                <small class="text-muted"
+                                                    data-translate="alert_monitoring_active">Continuous monitoring
+                                                    active</small>
                                             </div>
                                             <small class="text-muted" data-translate="time_now">Now</small>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="alert-item alert-warning">
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <div class="fw-bold" data-translate="alert_temp_rise">Slight Temperature Rise</div>
-                                                <small class="text-muted" data-translate="alert_temp_detected">37.2°C detected, monitoring closely</small>
+                                                <div class="fw-bold" data-translate="alert_temp_rise">Slight Temperature
+                                                    Rise</div>
+                                                <small class="text-muted" data-translate="alert_temp_detected">37.2°C
+                                                    detected, monitoring closely</small>
                                             </div>
                                             <small class="text-muted" data-translate="time_2h_ago">2h ago</small>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="alert-item alert-normal">
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <div class="fw-bold" data-translate="alert_sleep_started">Sleep Cycle Started</div>
-                                                <small class="text-muted" data-translate="alert_deep_sleep">Baby entered deep sleep phase</small>
+                                                <div class="fw-bold" data-translate="alert_sleep_started">Sleep Cycle
+                                                    Started</div>
+                                                <small class="text-muted" data-translate="alert_deep_sleep">Baby entered
+                                                    deep sleep phase</small>
                                             </div>
                                             <small class="text-muted" data-translate="time_2h15m_ago">2h 15m ago</small>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="alert-item alert-normal">
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <div class="fw-bold" data-translate="alert_feeding_reminder">Feeding Time Reminder</div>
-                                                <small class="text-muted" data-translate="alert_next_feeding">Next feeding in 30 minutes</small>
+                                                <div class="fw-bold" data-translate="alert_feeding_reminder">Feeding
+                                                    Time Reminder</div>
+                                                <small class="text-muted" data-translate="alert_next_feeding">Next
+                                                    feeding in 30 minutes</small>
                                             </div>
                                             <small class="text-muted" data-translate="time_3h_ago">3h ago</small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="p-3 border-top text-center">
-                                    <button class="btn btn-outline-primary btn-sm" data-translate="view_all_alerts">View All Alerts</button>
+                                    <button class="btn btn-outline-primary btn-sm" data-translate="view_all_alerts">View
+                                        All Alerts</button>
                                 </div>
                             </div>
                         </div>
@@ -375,4 +409,5 @@
     <!-- Custom JavaScript -->
     <script src="./script.js"></script>
 </body>
+
 </html>
