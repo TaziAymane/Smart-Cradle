@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Baby Monitoring - Smart Cradle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #7ED321;
+            --danger-color: #E74C3C;
+            --warning-color: #F39C12;
+            --success-color: #27AE60;
+            --dark-color: #2C3E50;
+            --light-bg: #F8FAFB;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--dark-color);
+        }
+
+        .monitoring-header {
+            background: linear-gradient(135deg, var(--primary-color), #357ABD);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .vital-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: none;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .vital-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .vital-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .vital-unit {
+            font-size: 1rem;
+            color: #7F8C8D;
+            font-weight: normal;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .status-normal { background: var(--success-color); }
+        .status-warning { background: var(--warning-color); }
+        .status-critical { background: var(--danger-color); }
+
+        .heartbeat-monitor {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 20px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ecg-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--success-color);
+            transform: translateY(-50%);
+        }
+
+        .ecg-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .heartbeat-value {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--success-color);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .heartbeat-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .alert-panel {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .alert-item {
+            padding: 15px;
+            border-left: 4px solid;
+            margin-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alert-normal { border-color: var(--success-color); background: rgba(39, 174, 96, 0.1); }
+        .alert-warning { border-color: var(--warning-color); background: rgba(243, 156, 18, 0.1); }
+        .alert-critical { border-color: var(--danger-color); background: rgba(231, 76, 60, 0.1); }
+
+        .baby-info-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            height: 400px;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: var(--danger-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        .heart-icon {
+            color: var(--danger-color);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .movement-indicator {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--success-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            animation: movement 3s infinite;
+        }
+
+        @keyframes movement {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        .temperature-gauge {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary-color) 0deg, var(--success-color) 180deg, var(--warning-color) 270deg, var(--danger-color) 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .temperature-inner {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: rgba(255,255,255,0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            background: white;
+            min-height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+
+        .sidebar-item {
+            padding: 15px 25px;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-item:hover, .sidebar-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .emergency-btn {
+            background: var(--danger-color);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .emergency-btn:hover {
+            background: #C0392B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-baby text-primary me-2"></i>Smart Cradle
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="live-indicator me-3">
+                    <div class="live-dot"></div>
+                    LIVE
+                </div>
+                <button class="btn emergency-btn">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Emergency
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="margin-top: 80px;">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 col-md-3 p-0">
+                <div class="sidebar">
+                    <a href="#" class="sidebar-item active">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <i class="fas fa-heartbeat me-2"></i>Vital Signs
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <i class="fas fa-chart-line me-2"></i>Trends
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <i class="fas fa-bell me-2"></i>Alerts
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <i class="fas fa-history me-2"></i>History
+                    </a>
+                    <a href="#" class="sidebar-item">
+                        <i class="fas fa-cog me-2"></i>Settings
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-10 col-md-9">
+                <div class="container-fluid py-4">
+                    <!-- Header -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2 class="mb-1">Real-time Baby Monitoring</h2>
+                                    <p class="text-muted mb-0">Last updated: <span id="lastUpdate"></span></p>
+                                </div>
+                                <div class="text-end">
+                                    <div class="d-flex align-items-center">
+                                        <span class="status-indicator status-normal"></span>
+                                        <span class="fw-bold text-success">All Systems Normal</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Baby Info Card -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="baby-info-card">
+                                <div class="row align-items-center">
+                                    <div class="col-md-2 text-center">
+                                        <i class="fas fa-baby" style="font-size: 4rem; opacity: 0.8;"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h6 class="mb-1">Baby Name</h6>
+                                                <p class="mb-0 fs-5">Emma Johnson</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h6 class="mb-1">Age</h6>
+                                                <p class="mb-0 fs-5">3 months, 2 weeks</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h6 class="mb-1">Weight</h6>
+                                                <p class="mb-0 fs-5">5.2 kg</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h6 class="mb-1">Sleep Status</h6>
+                                                <p class="mb-0 fs-5">
+                                                    <i class="fas fa-moon me-2"></i>Sleeping (2h 15m)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vital Signs Row -->
+                    <div class="row mb-4">
+                        <!-- Heart Rate Monitor -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="vital-card">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-heartbeat heart-icon me-2"></i>Heart Rate Monitor
+                                    </h5>
+                                    <span class="badge bg-success">Normal</span>
+                                </div>
+                                <div class="heartbeat-monitor">
+                                    <div class="heartbeat-label">ECG</div>
+                                    <div class="heartbeat-value" id="heartRate">128 BPM</div>
+                                    <canvas id="ecgCanvas" class="ecg-wave"></canvas>
+                                </div>
+                                <div class="mt-3">
+                                    <small class="text-muted">Normal range: 120-160 BPM</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Temperature -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="vital-card text-center">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-thermometer-half text-warning me-2"></i>Temperature
+                                </h6>
+                                <div class="temperature-gauge mx-auto mb-3">
+                                    <div class="temperature-inner">
+                                        <div class="vital-value text-warning" id="temperature">36.8</div>
+                                        <small class="vital-unit">°C</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">Min: 36.2°C</small>
+                                    <small class="text-muted">Max: 37.1°C</small>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-success">Normal</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Breathing Rate -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="vital-card text-center">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-lungs text-info me-2"></i>Breathing Rate
+                                </h6>
+                                <div class="vital-value text-info" id="breathingRate">42</div>
+                                <div class="vital-unit">breaths/min</div>
+                                <div class="mt-3">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-info" style="width: 70%"></div>
+                                    </div>
+                                    <small class="text-muted mt-2 d-block">Normal range: 30-60</small>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-success">Normal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Row of Vital Signs -->
+                    <div class="row mb-4">
+                        <!-- Oxygen Saturation -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="vital-card text-center">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-tint text-primary me-2"></i>Oxygen Saturation
+                                </h6>
+                                <div class="vital-value text-primary" id="oxygenSat">98</div>
+                                <div class="vital-unit">%</div>
+                                <div class="mt-3">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-primary" style="width: 98%"></div>
+                                    </div>
+                                    <small class="text-muted mt-2 d-block">Normal: {'>'} 95%</small>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-success">Excellent</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movement Detection -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="vital-card text-center">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-running text-success me-2"></i>Movement
+                                </h6>
+                                <div class="movement-indicator mx-auto mb-3">
+                                    <i class="fas fa-child"></i>
+                                </div>
+                                <div class="fw-bold text-success">Active</div>
+                                <small class="text-muted">Last movement: 2 min ago</small>
+                                <div class="mt-2">
+                                    <span class="badge bg-success">Normal Activity</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sleep Quality -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="vital-card text-center">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-bed text-purple me-2"></i>Sleep Quality
+                                </h6>
+                                <div class="vital-value text-purple">85</div>
+                                <div class="vital-unit">%</div>
+                                <div class="mt-3">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-purple" style="width: 85%; background-color: #9b59b6 !important;"></div>
+                                    </div>
+                                    <small class="text-muted mt-2 d-block">Deep sleep phase</small>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-success">Good Quality</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Environment -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="vital-card text-center">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-home text-secondary me-2"></i>Environment
+                                </h6>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="fw-bold">22°C</div>
+                                        <small class="text-muted">Room Temp</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="fw-bold">45%</div>
+                                        <small class="text-muted">Humidity</small>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="fw-bold text-success">
+                                        <i class="fas fa-volume-down me-1"></i>Quiet (25 dB)
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-success">Optimal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts and Alerts Row -->
+                    <div class="row">
+                        <!-- Trends Chart -->
+                        <div class="col-lg-8 mb-4">
+                            <div class="chart-container">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">24-Hour Vital Signs Trends</h5>
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary active">24H</button>
+                                        <button class="btn btn-outline-primary">7D</button>
+                                        <button class="btn btn-outline-primary">30D</button>
+                                    </div>
+                                </div>
+                                <canvas id="trendsChart" style="height: 300px;"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Alerts Panel -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="alert-panel">
+                                <div class="p-3 border-bottom">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-bell me-2"></i>Recent Alerts
+                                    </h5>
+                                </div>
+                                <div class="p-3">
+                                    <div class="alert-item alert-normal">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <div class="fw-bold">All Systems Normal</div>
+                                                <small class="text-muted">Continuous monitoring active</small>
+                                            </div>
+                                            <small class="text-muted">Now</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="alert-item alert-warning">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <div class="fw-bold">Slight Temperature Rise</div>
+                                                <small class="text-muted">37.2°C detected, monitoring closely</small>
+                                            </div>
+                                            <small class="text-muted">2h ago</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="alert-item alert-normal">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <div class="fw-bold">Sleep Cycle Started</div>
+                                                <small class="text-muted">Baby entered deep sleep phase</small>
+                                            </div>
+                                            <small class="text-muted">2h 15m ago</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="alert-item alert-normal">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <div class="fw-bold">Feeding Time Reminder</div>
+                                                <small class="text-muted">Next feeding in 30 minutes</small>
+                                            </div>
+                                            <small class="text-muted">3h ago</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-3 border-top text-center">
+                                    <button class="btn btn-outline-primary btn-sm">View All Alerts</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Real-time data simulation
+        let heartRateData = [];
+        let temperatureData = [];
+        let breathingData = [];
+        let currentTime = new Date();
+
+        // Initialize ECG Canvas
+        const ecgCanvas = document.getElementById('ecgCanvas');
+        const ecgCtx = ecgCanvas.getContext('2d');
+        ecgCanvas.width = ecgCanvas.offsetWidth;
+        ecgCanvas.height = ecgCanvas.offsetHeight;
+
+        // ECG Animation
+        let ecgX = 0;
+        function drawECG() {
+            ecgCtx.clearRect(0, 0, ecgCanvas.width, ecgCanvas.height);
+            ecgCtx.strokeStyle = '#27AE60';
+            ecgCtx.lineWidth = 2;
+            ecgCtx.beginPath();
+            
+            const centerY = ecgCanvas.height / 2;
+            const amplitude = 40;
+            
+            for (let x = 0; x < ecgCanvas.width; x++) {
+                let y = centerY;
+                
+                // Create ECG pattern
+                const phase = (x + ecgX) % 100;
+                if (phase < 10) {
+                    y = centerY;
+                } else if (phase < 15) {
+                    y = centerY - amplitude * 0.3;
+                } else if (phase < 20) {
+                    y = centerY + amplitude;
+                } else if (phase < 25) {
+                    y = centerY - amplitude * 1.5;
+                } else if (phase < 30) {
+                    y = centerY + amplitude * 0.5;
+                } else if (phase < 35) {
+                    y = centerY - amplitude * 0.2;
+                } else {
+                    y = centerY;
+                }
+                
+                if (x === 0) {
+                    ecgCtx.moveTo(x, y);
+                } else {
+                    ecgCtx.lineTo(x, y);
+                }
+            }
+            
+            ecgCtx.stroke();
+            ecgX += 2;
+            requestAnimationFrame(drawECG);
+        }
+
+        // Initialize trends chart
+        const trendsCtx = document.getElementById('trendsChart').getContext('2d');
+        
+        // Generate sample data for the last 24 hours
+        function generateSampleData() {
+            const data = [];
+            const labels = [];
+            const now = new Date();
+            
+            for (let i = 23; i >= 0; i--) {
+                const time = new Date(now.getTime() - i * 60 * 60 * 1000);
+                labels.push(time.getHours() + ':00');
+                
+                data.push({
+                    heartRate: 120 + Math.random() * 20 + Math.sin(i * 0.5) * 10,
+                    temperature: 36.5 + Math.random() * 0.8,
+                    breathing: 35 + Math.random() * 15,
+                    oxygen: 96 + Math.random() * 3
+                });
+            }
+            
+            return { labels, data };
+        }
+
+        const sampleData = generateSampleData();
+        
+        const trendsChart = new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: sampleData.labels,
+                datasets: [
+                    {
+                        label: 'Heart Rate (BPM)',
+                        data: sampleData.data.map(d => d.heartRate),
+                        borderColor: '#E74C3C',
+                        backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Temperature (°C)',
+                        data: sampleData.data.map(d => d.temperature),
+                        borderColor: '#F39C12',
+                        backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y1'
+                    },
+                    {
+                        label: 'Breathing Rate',
+                        data: sampleData.data.map(d => d.breathing),
+                        borderColor: '#3498DB',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Oxygen Sat (%)',
+                        data: sampleData.data.map(d => d.oxygen),
+                        borderColor: '#9B59B6',
+                        backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                        tension: 0.4,
+                        yAxisID: 'y2'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Time (Hours)'
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'BPM / Breaths per min'
+                        },
+                        min: 0,
+                        max: 180
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: false,
+                        position: 'right',
+                        min: 35,
+                        max: 39,
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    },
+                    y2: {
+                        type: 'linear',
+                        display: false,
+                        position: 'right',
+                        min: 90,
+                        max: 100,
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Real-time data updates
+        function updateVitalSigns() {
+            // Simulate real-time data changes
+            const heartRate = 120 + Math.random() * 20 + Math.sin(Date.now() / 10000) * 15;
+            const temperature = 36.5 + Math.random() * 0.6;
+            const breathing = 35 + Math.random() * 15;
+            const oxygen = 96 + Math.random() * 3;
+
+            // Update display values
+            document.getElementById('heartRate').textContent = Math.round(heartRate) + ' BPM';
+            document.getElementById('temperature').textContent = temperature.toFixed(1);
+            document.getElementById('breathingRate').textContent = Math.round(breathing);
+            document.getElementById('oxygenSat').textContent = Math.round(oxygen);
+
+            // Update last update time
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+
+        // Initialize
+        drawECG();
+        updateVitalSigns();
+
+        // Update vital signs every 2 seconds
+        setInterval(updateVitalSigns, 2000);
+
+        // Update chart data every 30 seconds
+        setInterval(() => {
+            const now = new Date();
+            const newLabel = now.getHours() + ':' + now.getMinutes().toString().padStart(2, '0');
+            
+            // Add new data point
+            trendsChart.data.labels.push(newLabel);
+            trendsChart.data.datasets[0].data.push(120 + Math.random() * 20);
+            trendsChart.data.datasets[1].data.push(36.5 + Math.random() * 0.8);
+            trendsChart.data.datasets[2].data.push(35 + Math.random() * 15);
+            trendsChart.data.datasets[3].data.push(96 + Math.random() * 3);
+            
+            // Remove old data point if more than 24 points
+            if (trendsChart.data.labels.length > 24) {
+                trendsChart.data.labels.shift();
+                trendsChart.data.datasets.forEach(dataset => dataset.data.shift());
+            }
+            
+            trendsChart.update('none');
+        }, 30000);
+
+        // Emergency button functionality
+        document.querySelector('.emergency-btn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to trigger an emergency alert? This will notify medical staff immediately.')) {
+                alert('Emergency alert sent! Medical staff have been notified.');
+                // Here you would typically send an actual emergency alert
+            }
+        });
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
