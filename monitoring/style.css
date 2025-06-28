@@ -1,0 +1,429 @@
+/* CSS Variables */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #7ED321;
+    --danger-color: #E74C3C;
+    --warning-color: #F39C12;
+    --success-color: #27AE60;
+    --dark-color: #2C3E50;
+    --light-bg: #F8FAFB;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--light-bg);
+    color: var(--dark-color);
+    transition: all 0.3s ease;
+}
+
+/* Arabic font support */
+[dir="rtl"] {
+    font-family: 'Segoe UI', 'Arabic UI Text', 'Tahoma', sans-serif;
+}
+
+/* RTL Layout adjustments */
+[dir="rtl"] .sidebar {
+    border-left: none;
+    border-right: 2px solid #e9ecef;
+}
+
+[dir="rtl"] .sidebar-item {
+    text-align: right;
+}
+
+[dir="rtl"] .alert-item {
+    border-left: none;
+    border-right: 4px solid;
+    border-radius: 8px 0 0 8px;
+}
+
+[dir="rtl"] .live-indicator {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .live-dot {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+[dir="rtl"] .status-indicator {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+[dir="rtl"] .heartbeat-value {
+    right: auto;
+    left: 20px;
+}
+
+[dir="rtl"] .heartbeat-label {
+    left: auto;
+    right: 20px;
+}
+
+[dir="rtl"] .language-flag {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* Header Styles */
+.monitoring-header {
+    background: linear-gradient(135deg, var(--primary-color), #357ABD);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Card Styles */
+.vital-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border: none;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.vital-card:hover {
+    transform: translateY(-5px);
+}
+
+.baby-info-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.chart-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    height: 400px;
+}
+
+.alert-panel {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Vital Signs Styles */
+.vital-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.vital-unit {
+    font-size: 1rem;
+    color: #7F8C8D;
+    font-weight: normal;
+}
+
+/* Status Indicators */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status-normal { 
+    background: var(--success-color); 
+}
+
+.status-warning { 
+    background: var(--warning-color); 
+}
+
+.status-critical { 
+    background: var(--danger-color); 
+}
+
+/* Heart Rate Monitor */
+.heartbeat-monitor {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 20px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ecg-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--success-color);
+    transform: translateY(-50%);
+}
+
+.ecg-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.heartbeat-value {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--success-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.heartbeat-label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+/* Temperature Gauge */
+.temperature-gauge {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--primary-color) 0deg, var(--success-color) 180deg, var(--warning-color) 270deg, var(--danger-color) 360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.temperature-inner {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Movement Indicator */
+.movement-indicator {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--success-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    animation: movement 3s infinite;
+}
+
+/* Alert Styles */
+.alert-item {
+    padding: 15px;
+    border-left: 4px solid;
+    margin-bottom: 10px;
+    border-radius: 0 8px 8px 0;
+}
+
+.alert-normal { 
+    border-color: var(--success-color); 
+    background: rgba(39, 174, 96, 0.1); 
+}
+
+.alert-warning { 
+    border-color: var(--warning-color); 
+    background: rgba(243, 156, 18, 0.1); 
+}
+
+.alert-critical { 
+    border-color: var(--danger-color); 
+    background: rgba(231, 76, 60, 0.1); 
+}
+
+/* Navigation Styles */
+.navbar {
+    background: rgba(255,255,255,0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.sidebar {
+    background: white;
+    min-height: 100vh;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    padding: 20px 0;
+}
+
+.sidebar-item {
+    padding: 15px 25px;
+    color: var(--dark-color);
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.sidebar-item:hover, 
+.sidebar-item.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Language Selector */
+.language-selector {
+    min-width: 120px;
+}
+
+.language-flag {
+    width: 20px;
+    height: 15px;
+    margin-right: 8px;
+    border-radius: 2px;
+}
+
+/* Flag icons using CSS */
+.flag-en {
+    background: linear-gradient(to bottom, #012169 33%, white 33%, white 66%, #C8102E 66%);
+}
+
+.flag-fr {
+    background: linear-gradient(to right, #002395 33%, white 33%, white 66%, #ED2939 66%);
+}
+
+.flag-ar {
+    background: linear-gradient(to bottom, #000000 25%, white 25%, white 50%, #CE1126 50%, #CE1126 75%, #007A3D 75%);
+}
+
+/* Live Indicator */
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    background: var(--danger-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 1.5s infinite;
+}
+
+/* Emergency Button */
+.emergency-btn {
+    background: var(--danger-color);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    transition: all 0.3s ease;
+}
+
+.emergency-btn:hover {
+    background: #C0392B;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.1); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
+}
+
+@keyframes movement {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+.heart-icon {
+    color: var(--danger-color);
+    animation: heartbeat 1.5s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .vital-card {
+        margin-bottom: 20px;
+    }
+    
+    .baby-info-card .row {
+        text-align: center;
+    }
+    
+    .baby-info-card .col-md-3 {
+        margin-bottom: 15px;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+    
+    .sidebar {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .vital-value {
+        font-size: 2rem;
+    }
+    
+    .temperature-gauge {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .temperature-inner {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .movement-indicator {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .heartbeat-monitor {
+        height: 250px;
+    }
+    
+    .language-selector {
+        min-width: 100px;
+    }
+    
+    .emergency-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
